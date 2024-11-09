@@ -114,3 +114,50 @@ class RobotButton extends Button {
         skillButtonsEnabled = true;
     }
 }
+
+class EndTurnButton extends Button {
+    draw() {
+        if (this.enabled && this.checkHover()) {
+            fill(150, 150, 180);
+        } else {
+            fill(130, 130, 160);
+        }
+        rect(this.x, this.y, this.w, this.h);
+        textAlign(CENTER, CENTER);
+        textSize(24);
+        fill(30, 30, 30);
+        text("End Turn", this.x + this.w * 0.5, this.y + this.h * 0.5);
+    }
+
+    onClick() {
+        for (let i = 0; i < 3; i++) {
+            playerBots[i].endOfTurn();
+            enemyBots[i].startOfTurn();
+        }
+        enemyRays++;
+        enemyTurn = true;
+    }
+
+    update() {
+        this.enabled = !enemyTurn;
+    }
+}
+
+class CosmicRayButton extends Button {
+    draw() {
+        if (this.enabled && this.checkHover()) {
+            fill(180, 120, 230);
+        } else {
+            fill(160, 100, 210);
+        }
+        rect(this.x, this.y, this.w, this.h);
+        fill(30, 30, 30);
+        textAlign(LEFT, CENTER);
+        textSize(24);
+        text("Cosmic Ray (" + playerRays + ")", this.x + 5, this.y + this.h * 0.5);
+    }
+
+    update() {
+        this.enabled = playerRays > 0 && !enemyTurn;
+    }
+}

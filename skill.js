@@ -5,6 +5,7 @@ class Skill {
         this.status2 = null;
         this.value1 = 0;
         this.value2 = 0;
+        this.statusApply = null;
         this.active = active;
         this.animation = 0;
         this.owner = null;
@@ -87,3 +88,21 @@ class Repair extends Skill {
     }
 }
 
+class Burn extends Skill {
+    constructor() {
+        super("Burn", false);
+        this.value1 = 2;
+    }
+
+    description() {
+        return "Take " + this.value1 + " damage at the end of turn.";
+    }
+
+    effect() {
+        this.owner.takeDamage(this.value1);
+    }
+
+    endOfTurn() {
+        this.effect();
+    }
+}

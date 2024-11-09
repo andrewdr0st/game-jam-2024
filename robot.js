@@ -29,7 +29,7 @@ class Robot {
 
         this.setSkill(0, new Smack());
         this.setSkill(1, new Rush());
-        this.setSkill(2, new Repair());
+        this.setSkill(2, new Burn());
     }
 
     draw() {

@@ -12,7 +12,7 @@ function updateParticles() {
         if (p.lifespan > 0) {
             p.update();
         } else {
-            particleList.splice(i);
+            particleList.splice(i, 1);
             i--;
         }
     }

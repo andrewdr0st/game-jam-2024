@@ -4,6 +4,11 @@ let bot;
 let playerBots = [];
 let enemyBots = [];
 
+let playerRays = 2;
+let enemyRays = 2;
+
+let enemyTurn = false;
+
 let selectedSkill = null;
 
 let applyingStatus = null;
@@ -33,6 +38,7 @@ function setup() {
         r.dir = -1;
         r.setPosition(width + (i - 2) * 90 - 200, 130 + i * 150);
         enemyBots.push(r);
+        r.canAct = false;
         addHover(new RobotHoverRegion(r.x - 55, r.y - 100, 95, 160, r));
         addButton(new RobotButton(r.x - 55, r.y - 100, 95, 160, r));
     }
@@ -51,6 +57,8 @@ function setup() {
         }
     }
 
+    addButton(new EndTurnButton(halfWidth - 65, bottomStart - 45, 130, 40));
+    addButton(new CosmicRayButton(5, bottomStart - 45, 210, 40));
 }
 
 function draw() {
