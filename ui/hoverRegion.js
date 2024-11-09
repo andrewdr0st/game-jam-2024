@@ -15,3 +15,16 @@ class HoverRegion {
         
     }
 }
+
+robotHoversEnabled = true;
+
+class RobotHoverRegion {
+    constructor(x, y, w, h, r) {
+        super(x, y, w, h);
+        this.r = r;
+    }
+
+    onHover() {
+        this.r.s = 1.1;
+    }
+}

@@ -4,15 +4,15 @@ function robotBody() {
     beginShape();
     vertex(0, -30);
     vertex(-25, -35);
-    vertex(-25, 25);
-    vertex(0, 30);
+    vertex(-25, 30);
+    vertex(0, 35);
     endShape();
     fill(135, 135, 135);
     beginShape();
     vertex(0, -30);
     vertex(50, -60);
-    vertex(50, 0);
-    vertex(0, 30);
+    vertex(50, 5);
+    vertex(0, 35);
     endShape();
     fill(150, 150, 150);
     beginShape();
@@ -20,6 +20,29 @@ function robotBody() {
     vertex(50, -60);
     vertex(25, -65);
     vertex(-25, -35);
+    endShape();
+}
+
+function robotTreads() {
+    fill(53, 53, 53);
+    ellipse(35, 5, 23, 23);
+    fill(58, 58, 58);
+    ellipse(-23, -3, 25, 25);
+    fill(49, 49, 49);
+    beginShape();
+    vertex(-30, -10);
+    vertex(30, 0);
+    vertex(30, 20);
+    vertex(-30, 10);
+    endShape();
+    ellipse(30, 10, 19, 19);
+    ellipse(-30, 0, 19, 19);
+    fill(60, 60, 60);
+    beginShape();
+    vertex(-30, -10);
+    vertex(30, 0);
+    vertex(40, -6);
+    vertex(-20, -16)
     endShape();
 }
 

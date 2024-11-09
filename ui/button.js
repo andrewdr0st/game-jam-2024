@@ -39,6 +39,10 @@ class Button {
     draw() {
 
     }
+
+    update() {
+
+    }
 }
 
 class SkillButton extends Button {
@@ -54,5 +58,13 @@ class SkillButton extends Button {
             fill(160, 160, 160);
         }
         rect(this.x, this.y, this.w, this.h);
+        fill(30, 30, 30);
+        textAlign(LEFT, CENTER);
+        textSize(22);
+        text(this.s.name, this.x + 5, this.y + this.h * 0.5);
+    }
+
+    update() {
+        this.enabled = this.s.owner.canAct;
     }
 }

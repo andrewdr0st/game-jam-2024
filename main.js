@@ -10,6 +10,7 @@ function setup() {
 
     noStroke();
     angleMode(DEGREES);
+    textFont('Courier New');
 
     for (let i = 0; i < 3; i++) {
         let r = new Robot();
@@ -24,26 +25,26 @@ function setup() {
         enemyBots.push(r);
     }
 
-    let r;
-    for (let i = 0; i < 6; i++) {
-        if (i < 3) {
-            r = playerBots[i];
-        } else {
-            r = enemyBots[i - 3];
-        }
-        for (let j = 0; j < 2; j++) {
-            addButton(new SkillButton(padding + (i * 2 + j) * (padding + skillButtonW), bottomStart + padding, skillButtonW, skillButtonH, r.skills[j]));
-            addButton(new SkillButton(padding + (i * 2 + j) * (padding + skillButtonW), bottomStart + padding * 2 + skillButtonH, skillButtonW, skillButtonH, r.skills[j + 2]));
+    for (let i = 0; i < 3; i++) {
+        let r = playerBots[i];
+        for (let j = 0; j < 3; j++) {
+            addButton(new SkillButton(padding + i * (padding + skillButtonW + skillSpacing), bottomStart + padding + j * (padding + skillButtonH), skillButtonW, skillButtonH, r.skills[j]));
         }
     }
 
-    
+    for (let i = 0; i < 3; i++) {
+        let r = enemyBots[i];
+        for (let j = 0; j < 3; j++) {
+            addButton(new SkillButton(padding + (i + 3) * (padding + skillButtonW + skillSpacing) + skillGap, bottomStart + padding + j * (padding + skillButtonH), skillButtonW, skillButtonH, r.skills[j]));
+        }
+    }
+
 }
 
 function draw() {
     calculateDeltaTime();
 
-    background(30, 30, 40);
+    background(10, 15, 10);
 
     drawBottomPanel();
 
