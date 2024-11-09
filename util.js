@@ -11,7 +11,11 @@ function drawSprite(f, x, y, s=1, r=0) {
     push();
     translate(x, y);
     rotate(r);
-    scale(s, 1); 
+    scale(s); 
     f(); 
     pop(); 
+}
+
+function lerpp(x, a, b) {
+    return (1 - x) * a + x * b;
 }

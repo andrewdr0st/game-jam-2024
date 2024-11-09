@@ -6,6 +6,7 @@ class Skill {
         this.value1 = 0;
         this.value2 = 0;
         this.active = active;
+        this.animation = 0;
         this.owner = null;
         this.target = null;
     }
@@ -18,8 +19,22 @@ class Skill {
 
     }
 
+    use() {
+        this.owner.target = this.target;
+        this.owner.setAnimation(this.animation);
+        this.owner.animating = true;
+        this.owner.canAct = false;
+    }
+
     endOfTurn() {
 
+    }
+
+    applyStatus(s) {
+        if (this.status1 != null) {
+            this.status2 = this.status1;
+        }
+        this.status1 = s;
     }
 }
 
@@ -43,6 +58,7 @@ class Rush extends Skill {
         super("Rush");
         this.value1 = 5;
         this.value2 = 2;
+        this.animation = 1;
     }
 
     description() {
@@ -52,6 +68,22 @@ class Rush extends Skill {
     effect() {
         this.target.takeDamage(this.value1);
         this.value1 += this.value2;
+    }
+}
+
+class Repair extends Skill {
+    constructor() {
+        super("Repair");
+        this.value1 = 5;
+        this.animation = 2;
+    }
+
+    description() {
+        return "Restore " + this.value1 + " hp.";
+    }
+
+    effect() {
+        this.target.heal(this.value1);
     }
 }
 

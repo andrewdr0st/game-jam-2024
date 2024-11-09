@@ -4,6 +4,14 @@ let bot;
 let playerBots = [];
 let enemyBots = [];
 
+let selectedSkill = null;
+
+let applyingStatus = null;
+let statusTarget = null;
+
+let animating = false;
+
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
     setupUiParams();
@@ -16,13 +24,17 @@ function setup() {
         let r = new Robot();
         r.setPosition(200 + i * 70, 130 + i * 150);
         playerBots.push(r);
+        addHover(new RobotHoverRegion(r.x - 40, r.y - 100, 95, 160, r));
+        addButton(new RobotButton(r.x - 40, r.y - 100, 95, 160, r));
     }
 
     for (let i = 0; i < 3; i++) {
         let r = new Robot();
-        r.setPosition(width + (i - 2) * 90 - 200, 130 + i * 150);
         r.dir = -1;
+        r.setPosition(width + (i - 2) * 90 - 200, 130 + i * 150);
         enemyBots.push(r);
+        addHover(new RobotHoverRegion(r.x - 55, r.y - 100, 95, 160, r));
+        addButton(new RobotButton(r.x - 55, r.y - 100, 95, 160, r));
     }
 
     for (let i = 0; i < 3; i++) {
@@ -44,16 +56,30 @@ function setup() {
 function draw() {
     calculateDeltaTime();
 
-    background(10, 15, 10);
+    updatePanels();
+    updateButtons();
+    hoverUpdate();
+    updateParticles();
 
-    drawBottomPanel();
+    background(10, 15, 10);
 
     for (let i = 0; i < 3; i++) {
         playerBots[i].draw();
+        playerBots[i].drawBattery();
+        playerBots[i].update();
     }
     for (let i = 0; i < 3; i++) {
         enemyBots[i].draw();
+        enemyBots[i].drawBattery();
+        enemyBots[i].update();
     }
 
+    drawParticles();
+
+    drawBottomPanel();
     drawButtons();
+}
+
+function mouseClicked() {
+    buttonClick();
 }

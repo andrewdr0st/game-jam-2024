@@ -6,10 +6,16 @@ function drawButtons() {
     }
 }
 
+function updateButtons() {
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].update();
+    }
+}
+
 function buttonClick() {
     for (let i = 0; i < buttons.length; i++) {
         let b = buttons[i];
-        if (b.enabled && b.checkHover) {
+        if (b.enabled && b.checkHover()) {
             b.onClick();
         }
     }
@@ -45,6 +51,8 @@ class Button {
     }
 }
 
+let skillButtonsEnabled = true;
+
 class SkillButton extends Button {
     constructor(x, y, w, h, s) {
         super(x, y, w, h);
@@ -52,7 +60,9 @@ class SkillButton extends Button {
     }
 
     draw() {
-        if (this.enabled && this.checkHover()) {
+        if (!this.enabled) {
+            fill(145, 145, 145);
+        } else if ( this.checkHover()) {
             fill(180, 180, 180);
         } else {
             fill(160, 160, 160);
@@ -65,6 +75,42 @@ class SkillButton extends Button {
     }
 
     update() {
-        this.enabled = this.s.owner.canAct;
+        this.enabled = (this.s.owner.canAct || this.s.owner.statusing) && skillButtonsEnabled;
+    }
+
+    onClick() {
+        if (applyingStatus != null) {
+            this.s.applyStatus(applyingStatus);
+            applyingStatus = null;
+            this.s.owner.statusing = false;
+            skillButtonsEnabled = true;
+        } else {
+            if (!this.s.active) {
+                return;
+            }
+            selectedSkill = this.s;
+            robotButtonsEnabled = true;
+            skillButtonsEnabled = false;
+        }
+    }
+}
+
+let robotButtonsEnabled = false;
+
+class RobotButton extends Button {
+    constructor(x, y, w, h, r) {
+        super(x, y, w, h);
+        this.r = r;
+    }
+
+    update() {
+        this.enabled = robotButtonsEnabled;
+    }
+
+    onClick() {
+        selectedSkill.target = this.r;
+        selectedSkill.use();
+        robotButtonsEnabled = false;
+        skillButtonsEnabled = true;
     }
 }
