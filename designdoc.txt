@@ -1,0 +1,59 @@
+Bit flip
+
+Puzzle game?
+Flip individual bits
+
+
+Combat where you shoot cosmic rays at robots to mess with their code?
+like the mutant dna idea
+
+each robot has a set of skills, active and passive
+shoot a ray at a skill to change it into something random
+
+gain multiple rays per turn for more influence
+nah gain 1
+
+turn structure:
+each robot gets one action
+use cosmic rays at any point to flip bits
+
+3 vs 3
+
+maybe robots dont have hp, instead goal is to deal the most damage to the center core
+or fight each other, limited revives, but on revive you get to reprogram
+
+gain a bank of skills that can be used on revive
+
+
+status (apply to skill):
+mutant: skill flips after use/triggering
+lockdown: skill can't flip
+firewall: cant be inflicted with a status
+null pointer: when a skill is used, chance for it to pick a random skill
+buffer overflow: when a status is applied to this, apply it to every status
+infinte loop: only this skill can be used once used or until flipped
+virus: another random skill becomes this skill at end of turn
+overclock: next skill is used twice, then this turns into burn
+++: gains +1 value at end of turn
+race condition: this skill may be used instead of another one
+syntax error: this skill has no effect
+
+
+
+skills:
+freeze ray: apply 2 lockdown
+gamma ray: apply 2 mutant
+focus light: gain 2 cosmic ray
+rush: deal damage and gain power
+flamethrower: deal damage and apply burn to self and target
+reboot: flip all skills, gain a cosmic ray
+defender: gain hp and apply firewall
+void beam: deal damage, afflict null pointer
+overheat: damage all enemies, gain burn
+trojan: heal and apply virus
+burn: take damage at end of turn
+electric thread: deal damage and apply race condition
+fat laser: big damage, might buffer overflow
+increment: apply ++ to a random skill
+
+
